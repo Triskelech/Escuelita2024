@@ -1,0 +1,9 @@
+bin
+obj
+.vs/
+Model/bin
+Model/obj
+Service/bin
+Service/obj
+Web/bin
+Web/obj
