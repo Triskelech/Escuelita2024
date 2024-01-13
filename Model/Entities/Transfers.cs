@@ -16,6 +16,6 @@ namespace Model.Entities
 
         [ForeignKey("OriginAccount")]
         public int OriginAccountId { get; set; }
-        public Account OriginAccount { get; set; }
+        public virtual Account OriginAccount { get; set; }
     }
 }
