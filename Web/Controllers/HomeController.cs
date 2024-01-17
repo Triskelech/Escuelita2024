@@ -22,55 +22,60 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
-            var users = _entityService.AsQueryable<User>().ToList();
-            return Json(new { users });
+            return View();
         }
 
-        public IActionResult GetAllAccounts()
-        {
-            var accounts = _entityService.AsQueryable<Account>().ToList();
-            return Json(new { accounts });
-        }
+        //public IActionResult Index()
+        //{
+        //    var users = _entityService.AsQueryable<User>().ToList();
+        //    return Json(new { users });
+        //}
 
-        public IActionResult GetAllTransfers()
-        {
-            var transfers = _entityService.AsQueryable<Transfer>().ToList();
-            return Json(new { transfers });
-        }
+        //public IActionResult GetAllAccounts()
+        //{
+        //    var accounts = _entityService.AsQueryable<Account>().ToList();
+        //    return Json(new { accounts });
+        //}
 
-        public IActionResult SaveAccount([FromBody] Account account)
-        {
-            _entityService.Save(account);
+        //public IActionResult GetAllTransfers()
+        //{
+        //    var transfers = _entityService.AsQueryable<Transfer>().ToList();
+        //    return Json(new { transfers });
+        //}
 
-            var user = _entityService.Load<User>(account.UserId);
-            user.Account = account;
-            _entityService.SaveAndFlush(user);
+        //public IActionResult SaveAccount([FromBody] Account account)
+        //{
+        //    _entityService.Save(account);
 
-            return Json(new { ok = true });
-        }
+        //    var user = _entityService.Load<User>(account.UserId);
+        //    user.Account = account;
+        //    _entityService.SaveAndFlush(user);
 
-        public IActionResult SaveUser([FromBody] User user)
-        {
-            _entityService.SaveAndFlush(user);
+        //    return Json(new { ok = true });
+        //}
 
-            return Json(new { ok = true });
-        }
+        //public IActionResult SaveUser([FromBody] User user)
+        //{
+        //    _entityService.SaveAndFlush(user);
 
-        public IActionResult SaveTransfer([FromBody]Transfer transfer)
-        {
-            _entityService.Save(transfer);
+        //    return Json(new { ok = true });
+        //}
 
-            var account = _entityService.Load<Account>(transfer.OriginAccountId);
+        //public IActionResult SaveTransfer([FromBody]Transfer transfer)
+        //{
+        //    _entityService.Save(transfer);
 
-            if(account.Transfers == null)
-            {
-                account.Transfers = new List<Transfer>();
-            }
+        //    var account = _entityService.Load<Account>(transfer.OriginAccountId);
 
-            account.Transfers.Add(transfer);
-            _entityService.SaveAndFlush(account);
+        //    if(account.Transfers == null)
+        //    {
+        //        account.Transfers = new List<Transfer>();
+        //    }
 
-            return Json(new { ok = true });
-        }
+        //    account.Transfers.Add(transfer);
+        //    _entityService.SaveAndFlush(account);
+
+        //    return Json(new { ok = true });
+        //}
     }
 }
