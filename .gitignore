@@ -5,5 +5,7 @@ Model/bin
 Model/obj
 Service/bin
 Service/obj
+Test/bin
+Test/obj
 Web/bin
 Web/obj
