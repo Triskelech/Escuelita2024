@@ -32,6 +32,10 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
 #region Services
 builder.Services.AddTransient<IEntityService, EntityService>();
+
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IAccountService, AccountService>();
+builder.Services.AddTransient<ITransferService, TransferService>();
 #endregion
 
 var app = builder.Build();

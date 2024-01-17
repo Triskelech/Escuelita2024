@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "_Layout";
+    var list = ViewBag.List;
+    var type = ViewBag.ElementType;
+    string itemName = null;
+    switch(type)
+    {
+        case "User":
+            itemName = "Usuario";
+            break;
+        case "Account":
+            itemName = "Cuenta";
+            break;
+        case "Transfer":
+            itemName = "Transferencia";
+            break;
+    }
+    ViewData["Title"] = $"Lista de {itemName}s";
+}
+
+<div class="container text-center d-flex justify-content-around">
+    <h1> Lista de la clase @(itemName)</h1>
+    <div>
+        <a href="Add" alt="link to add @(itemName)" class="btn bg-success ms-1 mt-2">Crear @itemName</a>
+    </div>
+</div>
+
+@if (!(list == null || list.Count == 0))
+{
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col" class="text-center">Actions</th>
+            </tr>
+
+        </thead>
+        <tbody class="table-group-divider">
+            @{
+                foreach (var item in list)
+                {
+                    <tr>
+                        <th class="align-middle" scope="row">@item.Id</th>
+                        <td class="d-flex justify-content-around">
+                            <div>
+                                <a href="Edit/@item.Id" alt="update link" class="btn bg-warning">Update</a>
+                            </div>
+                            <div>
+                                <a href="Remove/@item.Id" alt="delete link" class="btn bg-danger">Delete</a>
+                            </div>
+                            <div>
+                                <a href="Load/@item.Id" alt="show link" class="btn bg-info">Show</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="container col-8 text-center">
+        <p class="fst-bold">No hay ningún @itemName aún</p>
+    </div>
+}
+<div class="container mt-1">
+    <a href="/Home" alt="home link" class="btn bg-secondary w-100" type="button">Main</a>
+</div>
+
+
+
+
+

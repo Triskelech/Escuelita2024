@@ -1,8 +1,27 @@
 ﻿@{
+    Layout = "_Layout";
+
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bienvenido</h1>
+    <p class="fs-6 pt-1">
+        Para ver la distintas listas elige el link correspondiente
+    </p>
+    <div class="d-flex justify-content-center">
+        <div class="pt-1">
+            <a href="~/User/Index" class="btn btn-success">Lista de Usuarios</a>
+        </div>
+        <div class="pt-1 ps-1">
+            <a href="~/Account/Index" class="btn btn-info">Lista de Cuentas</a>
+        </div>
+        <div class="pt-1 ps-1">
+            <a href="~/Transfer/Index" class="btn btn-info">Lista de Transferencias</a>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/main.js" asp-append-version="true"></script>
+}

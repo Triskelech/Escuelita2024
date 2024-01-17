@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "_Layout";
+    var list = ViewBag.List;
+    var type = ViewBag.ElementType;
+    string itemName = null;
+    switch(type)
+    {
+        case "User":
+            itemName = "Usuario";
+            break;
+        case "Account":
+            itemName = "Cuenta";
+            break;
+        case "Transfer":
+            itemName = "Transferencia";
+            break;
+    }
+    ViewData["Title"] = $"Lista de {itemName}s";
+}
+
+<div class="container text-center d-flex justify-content-around">
+    <h1> Lista de la clase @(itemName)</h1>
+    <div>
+        <a href="Add" alt="link to add @(itemName)" class="btn bg-success ms-1 mt-2">Crear @itemName</a>
+    </div>
+</div>
+
+@if (!(list == null || list.Count == 0))
+{
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Id</th>
+                @switch(type)
+                {
+                    case "User":
+                        <th scope="col">FirstName</th>
+                        <th scope="col">LastName</th>
+                        <th scope="col">UserName</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">AccountId</th>
+                        break;
+                    case "Account":
+                        <th scope="col">Code</th>
+                        <th scope="col">MoneyAmount</th>
+                        <th scope="col">UserId</th>
+                        break;
+                    case "Transfer":
+                        <th scope="col">Code</th>
+                        <th scope="col">DateTime</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">OriginAccountId</th>
+                        break;
+                }
+                <th scope="col" class="text-center">Actions</th>
+            </tr>
+
+        </thead>
+        <tbody class="table-group-divider">
+            @{
+                foreach (var item in list)
+                {
+                    <tr>
+                        <th class="align-middle" scope="row">@item.Id</th>
+                        @switch (type)
+                        {
+                            case "User":
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.UserName</td>
+                                <td>@item.Password</td>
+                                <td>@item.AccountId</td>
+                                break;
+                            case "Account":
+                                <td>@item.Code</td>
+                                <td>@item.MoneyAmount</td>
+                                <td>@item.UserId</td>
+                                break;
+                            case "Transfer":
+                                <td>@item.Code</td>
+                                <td>@item.DateTime</td>
+                                <td>@item.Amount</td>
+                                <td>@item.OriginAccountId</td>
+                                break;
+                        }
+                        <td class="d-flex justify-content-around">
+                            <div>
+                                <a href="Edit/@item.Id" alt="update link" class="btn bg-warning">Update</a>
+                            </div>
+                            <div>
+                                <a href="Remove/@item.Id" alt="delete link" class="btn bg-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="container col-8 text-center">
+        <p class="fst-bold">No hay ningún @itemName aún</p>
+    </div>
+}
+<div class="container mt-1">
+    <a href="/Home" alt="home link" class="btn bg-secondary w-100" type="button">Main</a>
+</div>

@@ -1,0 +1,158 @@
+@using Model.Entities
+@{
+    Layout = "_Layout";
+
+    var element = ViewBag.Element;
+    string elementString = null;
+    string action = ViewBag.Action;
+
+    if(element is User)
+    {
+        elementString = "user";
+    }
+    else if (element is Account)
+    {
+        elementString = "account";
+    }
+    else if (element is Transfer)
+    {
+        elementString = "transfer";
+    }
+
+    ViewData["Title"] = $"{elementString} {action} page";
+
+    string disable = null;
+    string disableId = null;
+    bool notReadOnly = true;
+    string stringUrlUp = "../";
+
+    switch (action)
+    {
+        case "show":
+            DisableInput();
+            notReadOnly = false;
+            break;
+        case "delete":
+            DisableInput();
+            break;
+        case "update":
+            disableId = "readOnly";
+            break;
+        default:
+            stringUrlUp = null;
+            break;
+    }
+
+    // action = char.ToUpper(action[0]) + action.Substring(1);
+
+    void DisableInput()
+    {
+        disable = "readOnly";
+        disableId = "readOnly";
+    }
+}
+
+<div class="container">
+    <div class="col-5">
+        @if (!action.Equals("add"))
+        {
+            <div>
+                <label class="form-label" for="Id">Id</label>
+                <input id="@(elementString)Id" type="text" class="form-control"
+                name="Id" value="@element.Id" @disableId />
+            </div>
+        }
+        @if (element is User)
+        {
+            <div>
+                <label class="form-label" for="FirstName">FirstName</label>
+                <input id="@(elementString)FirstName" type="text" class="form-control"
+                name="FirstName" value="@(element == null ? "" : element.FirstName)" @disable />
+            </div>
+            <div>
+                <label class="form-label" for="LastName">LastName</label>
+                <input id="@(elementString)LastName" type="text" class="form-control"
+                name="LastName" value="@(element == null ? "" : element.LastName)" @disable />
+            </div>
+            <div>
+                <label class="form-label" for="UserName">UserName</label>
+                <input id="@(elementString)UserName" type="text" class="form-control"
+                name="UserName" value="@(element == null ? "" : element.UserName)" @disable />
+            </div>
+            <div>
+                <label class="form-label" for="Password">Password</label>
+                <input id="@(elementString)Password" type="password" class="form-control"
+                name="Password" value="@(element == null ? "" : element.Password)" @disable />
+            </div>
+            <div>
+                <label class="form-label" for="AccountId">AccountId</label>
+                <input id="@(elementString)AccountId" type="number" class="form-control"
+                name="AccountId" value="@(element == null ? "" : element.AccountId)" @disable />
+            </div>
+        }
+        else if (element is Account)
+        {
+            <div>
+                <label class="form-label" for="Code">Code</label>
+                <input id="@(elementString)Code" type="text" class="form-control"
+                       name="Code" value="@(element == null ? "" : element.Code)" @disable />
+            </div>
+            <div>
+                <label class="form-label" for="MoneyAmount">MoneyAmount</label>
+                <input id="@(elementString)MoneyAmount" type="number" class="form-control"
+                       name="MoneyAmount" value="@(element == null ? "" : element.MoneyAmount)" @disable />
+            </div>
+            <div>
+                <label class="form-label" for="UserId">UserId</label>
+                <input id="@(elementString)UserId" type="number" class="form-control"
+                       name="UserId" value="@(element == null ? "" : element.UserId)" @disable />
+            </div>
+        }
+        else if(element is Transfer)
+            {
+                <div>
+                <label class="form-label" for="Code">Code</label>
+                <input id="@(elementString)Code" type="text" class="form-control"
+                       name="Code" value="@(element == null ? "" : element.Code)" @disable />
+                </div>
+                <div>
+                <label class="form-label" for="DateTime">DateTime</label>
+                <input id="@(elementString)DateTime" type="text" class="form-control"
+                       name="DateTime" value="@(element == null ? "" : element.DateTime)" @disable />
+                </div>
+                <div>
+                <label class="form-label" for="Amount">Amount</label>
+                <input id="@(elementString)Amount" type="number" class="form-control"
+                       name="Amount" value="@(element == null ? "" : element.Amount)" @disable />
+                </div>
+                <div>
+                <label class="form-label" for="OriginAccountId">OriginAccountId</label>
+                <input id="@(elementString)OriginAccountId" type="number" class="form-control"
+                       name="OriginAccountId" value="@(element == null ? "" : element.OriginAccountId)" @disable />
+                </div>
+            }
+        
+        
+        <div class="d-flex justify-content-between mt-1">
+            <div>
+                <a class="btn bg-success" href="@(stringUrlUp)List">Back</a>
+            </div>
+
+            @if (notReadOnly)
+            {
+                <div>
+                    <button id="action-button" class="btn bg-danger @action">@action</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@if (!action.Equals("show"))
+{
+    @section Scripts {
+    <script src="~/js/@(elementString).js" asp-append-version="true"></script>
+    }
+}
+
+
