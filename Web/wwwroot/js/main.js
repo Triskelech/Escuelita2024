@@ -1,7 +1,6 @@
 button.onclick = sendRequest;
 
 function sendRequest() {
-
     $.ajax({
         type: "POST",
         url: "/" + target + urlEnd,

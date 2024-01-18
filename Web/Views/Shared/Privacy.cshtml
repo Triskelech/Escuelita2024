@@ -1,0 +1,15 @@
+﻿@using Service.Services;
+@using Service.Contracts;
+@using Model.Entities;
+@inject IEntityService EntityService;
+
+@{
+    var entityService = EntityService;
+    var users = EntityService.Load<User>(1);
+}
+
+<h1>HOLAAAAA</h1>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}

@@ -39,5 +39,10 @@ namespace Model.Entities
         {
             _context = context;
         }
+
+        public static EscuelitaContext GetContext()
+        {
+            return null; 
+        }
     }
 }

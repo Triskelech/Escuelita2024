@@ -21,6 +21,11 @@ builder.Services.AddSession(options =>
 builder.Services.AddHttpContextAccessor(); // Access to context from outside controllers
 #endregion
 
+#region Services
+builder.Services.AddScoped<IEntityService, EntityService>();
+builder.Services.AddScoped<IContextScope<EscuelitaContext>, ContextScope<EscuelitaContext>>();
+#endregion
+
 #region DB
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
@@ -41,6 +46,11 @@ builder.Services.AddTransient<ITransferService, TransferService>();
 var app = builder.Build();
 
 #region Accesors
+
+// dependency inyection ->
+//ServiceActivator.Initialize(app.Services);
+// <-
+
 //AppSettings.Configuration = configuration;
 //SystemEnvironment.Environment = builder.Environment;
 #endregion
