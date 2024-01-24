@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Model.Context;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Model.Context;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Entities
 {
@@ -42,7 +36,7 @@ namespace Model.Entities
 
         public static EscuelitaContext GetContext()
         {
-            return null; 
+            return null;
         }
     }
 }

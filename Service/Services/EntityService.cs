@@ -1,12 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Model.Context;
+﻿using Model.Context;
 using Model.Entities;
 using Service.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Services
 {
@@ -21,7 +15,7 @@ namespace Service.Services
 
         public EscuelitaContext Context
         {
-            get {  return _context; }
+            get { return _context; }
         }
 
         public IQueryable<T> AsQueryable<T>() where T : Entity
@@ -36,7 +30,14 @@ namespace Service.Services
 
         public void Save<T>(T entity) where T : Entity
         {
-            Context.Set<T>().Update(entity);
+            if (entity.Id == 0)
+            {
+                Context.Set<T>().Add(entity);
+            }
+            else
+            {
+                Context.Set<T>().Update(entity);
+            }
         }
 
         public void SaveChanges()
@@ -54,7 +55,7 @@ namespace Service.Services
         {
             var entity = Load<T>(id);
 
-            if(entity != null)
+            if (entity != null)
             {
                 Delete(entity);
             }

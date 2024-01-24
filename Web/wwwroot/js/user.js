@@ -22,3 +22,5 @@ var json = {
     "Password": $("#userPassword").val(),
     "AccountId": parseInt($("#userAccountId").val(), 10)
 };
+
+button.onclick = sendRequest;
