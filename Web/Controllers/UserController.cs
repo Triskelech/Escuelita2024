@@ -40,7 +40,7 @@ namespace Web.Controllers
             userService.SaveAndFlush(user);
             return Json(new GenericResponse(200, "El usuario fue insertado"));
         }
-        [HttpGet]
+        //[HttpGet]
         public IActionResult Edit(int id)
         {
             var user = userService.Load<User>(id);

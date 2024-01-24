@@ -54,7 +54,7 @@ button.onclick = function () {
             } else {
                 alert("No se pudo realizar la acción");
             }
-            window.location.href = "/" + target + "/ListAndShow";
+            window.location.href = "/" + target + "/Index";
         },
         error: function (response) {
             console.log("Error:", "error genérico", response);
