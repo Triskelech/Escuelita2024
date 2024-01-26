@@ -4,7 +4,7 @@ using Service.Contracts;
 
 namespace Service.Services
 {
-    public class EntityService : IEntityService
+    public class EntityService<T> : IEntityService<T> where T : Entity
     {
         private EscuelitaContext _context;
 
@@ -18,17 +18,17 @@ namespace Service.Services
             get { return _context; }
         }
 
-        public IQueryable<T> AsQueryable<T>() where T : Entity
+        public IQueryable<T> AsQueryable()
         {
             return Context.Set<T>().AsQueryable();
         }
 
-        public T? Load<T>(int id) where T : Entity
+        public T? Load(int id)
         {
             return Context.Set<T>().SingleOrDefault(a => a.Id == id);
         }
 
-        public void Save<T>(T entity) where T : Entity
+        public void Save(T entity)
         {
             if (entity.Id == 0)
             {
@@ -45,15 +45,15 @@ namespace Service.Services
             Context.SaveChanges();
         }
 
-        public void SaveAndFlush<T>(T entity) where T : Entity
+        public void SaveAndFlush(T entity)
         {
             Save(entity);
             SaveChanges();
         }
 
-        public void Delete<T>(int id) where T : Entity
+        public void Delete(int id)
         {
-            var entity = Load<T>(id);
+            var entity = Load(id);
 
             if (entity != null)
             {
@@ -61,18 +61,18 @@ namespace Service.Services
             }
         }
 
-        public void Delete<T>(T entity) where T : Entity
+        public void Delete(T entity)
         {
             Context.Set<T>().Remove(entity);
         }
 
-        public void DeleteAndFlush<T>(int id) where T : Entity
+        public void DeleteAndFlush(int id)
         {
-            Delete<T>(id);
+            Delete(id);
             SaveChanges();
         }
 
-        public void DeleteAndFlush<T>(T entity) where T : Entity
+        public void DeleteAndFlush(T entity)
         {
             Delete(entity);
             SaveChanges();

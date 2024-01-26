@@ -16,14 +16,14 @@ namespace Web.Controllers
         }
         public IActionResult Index()
         {
-            ViewBag.List = transferService.AsQueryable<Transfer>().ToList();
+            ViewBag.List = transferService.AsQueryable().ToList();
             ViewBag.ElementType = "Transfer";
             return View("ListAndShow");
         }
 
         public IActionResult Load(int id)
         {
-            ViewBag.Element = transferService.Load<Transfer>(id);
+            ViewBag.Element = transferService.Load(id);
             ViewBag.Action = "show";
             return View("Show");
         }
@@ -44,7 +44,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var transfer = transferService.Load<Transfer>(id);
+            var transfer = transferService.Load(id);
             ViewBag.Element = transfer;
             ViewBag.Action = "update";
             return View("ShowPartial");
@@ -60,7 +60,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Remove(int id)
         {
-            var transfer = transferService.Load<Transfer>(id);
+            var transfer = transferService.Load(id);
             ViewBag.Element = transfer;
             ViewBag.Action = "delete";
             return View("ShowPartial");

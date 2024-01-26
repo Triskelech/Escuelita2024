@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Model.Entities;
 
 namespace Service.Contracts
 {
-    public interface ITransferService : IEntityService
+    public interface ITransferService : IEntityService<Transfer>
     {
     }
 }

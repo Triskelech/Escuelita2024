@@ -1,11 +1,11 @@
 ﻿@using Service.Services;
 @using Service.Contracts;
 @using Model.Entities;
-@inject IEntityService EntityService;
+@inject IUserService UserService;
 
 @{
-    var entityService = EntityService;
-    var users = EntityService.Load<User>(1);
+    var entityService = UserService;
+    var users = UserService.Load(1);
 }
 
 <h1>BLA BLA BLA</h1>

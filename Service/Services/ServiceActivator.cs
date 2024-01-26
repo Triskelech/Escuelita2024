@@ -1,10 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Model.Entities;
 using Service.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Services
 {
@@ -17,6 +13,6 @@ namespace Service.Services
             _serviceProvider = serviceProvider;
         }
 
-        public static IEntityService EntityService => _serviceProvider.GetService<IEntityService>();
+        public static IEntityService<Entity> EntityService => _serviceProvider.GetService<IEntityService<Entity>>();
     }
 }

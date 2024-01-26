@@ -1,26 +1,21 @@
 ﻿using Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Contracts
 {
-    public interface IEntityService
+    public interface IEntityService<T> where T : Entity
     {
-        IQueryable<T> AsQueryable<T>() where T : Entity;
+        IQueryable<T> AsQueryable();
 
-        T? Load<T>(int id) where T : Entity;
+        T? Load(int id);
 
-        void Save<T>(T entity) where T : Entity;
+        void Save(T entity);
 
         void SaveChanges();
 
-        void SaveAndFlush<T>(T entity) where T : Entity;
+        void SaveAndFlush(T entity);
 
-        void Delete<T>(int id) where T : Entity;
+        void Delete(int id);
 
-        void Delete<T>(T entity) where T : Entity;
+        void Delete(T entity);
     }
 }

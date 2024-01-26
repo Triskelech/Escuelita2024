@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Model.Context;
+using Model.Entities;
 using Service.Contracts;
 using Service.Services;
 using System.Text.Json.Serialization;
@@ -22,7 +23,7 @@ builder.Services.AddHttpContextAccessor(); // Access to context from outside con
 #endregion
 
 #region Services
-builder.Services.AddScoped<IEntityService, EntityService>();
+builder.Services.AddScoped<IEntityService<Entity>, EntityService<Entity>>();
 builder.Services.AddScoped<IContextScope<EscuelitaContext>, ContextScope<EscuelitaContext>>();
 #endregion
 
@@ -36,7 +37,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 #endregion
 
 #region Services
-builder.Services.AddTransient<IEntityService, EntityService>();
+builder.Services.AddTransient<IEntityService<Entity>, EntityService<Entity>>();
 
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IAccountService, AccountService>();

@@ -5,18 +5,22 @@
     var element = ViewBag.Element;
     string elementString = null;
     string action = ViewBag.Action;
+    string controller = null;
 
     if(element is User)
     {
         elementString = "user";
+        controller = "User";
     }
     else if (element is Account)
     {
         elementString = "account";
+        controller = "Account";
     }
     else if (element is Transfer)
     {
         elementString = "transfer";
+        controller = "Transfer";
     }
 
     ViewData["Title"] = $"{elementString} {action} page";
@@ -24,7 +28,6 @@
     string disable = null;
     string disableId = null;
     bool notReadOnly = true;
-    string stringUrlUp = "../";
 
     switch (action)
     {
@@ -33,9 +36,6 @@
             break;
         case "update":
             disableId = "readOnly";
-            break;
-        default:
-            stringUrlUp = null;
             break;
     }
 
@@ -110,32 +110,35 @@
         }
         else if(element is Transfer)
         {
-                <div>
+            <div>
                 <label class="form-label" for="Code">Code</label>
                 <input id="@(elementString)Code" type="text" class="form-control"
                        name="Code" value="@(element == null ? "" : element.Code)" @disable />
-                </div>
-                <div>
+            </div>
+
+            string dateFormat = element.DateTime.ToString("yyyy-MM-dd");
+
+            <div>
                 <label class="form-label" for="DateTime">DateTime</label>
-                <input id="@(elementString)DateTime" type="text" class="form-control"
-                       name="DateTime" value="@(element == null ? "" : element.DateTime)" @disable />
-                </div>
-                <div>
+                <input id="@(elementString)DateTime" type="date" class="form-control"
+                       name="DateTime" value="@(element == null ? "" : dateFormat)" @disable />
+            </div>
+            <div>
                 <label class="form-label" for="Amount">Amount</label>
                 <input id="@(elementString)Amount" type="number" class="form-control"
                        name="Amount" value="@(element == null ? "" : element.Amount)" @disable />
-                </div>
-                <div>
+            </div>
+            <div>
                 <label class="form-label" for="OriginAccountId">OriginAccountId</label>
                 <input id="@(elementString)OriginAccountId" type="number" class="form-control"
                        name="OriginAccountId" value="@(element == null ? "" : element.OriginAccountId)" @disable />
-                </div>
+            </div>
         }
         
         
         <div class="d-flex justify-content-between mt-1">
             <div>
-                <a class="btn bg-success" href="@(stringUrlUp)Index">Back</a>
+                <a class="btn bg-success" href="~/@controller/Index">Back</a>
             </div>
 
             @if (notReadOnly)

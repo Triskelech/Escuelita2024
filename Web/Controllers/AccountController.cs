@@ -15,14 +15,14 @@ namespace Web.Controllers
         }
         public IActionResult Index()
         {
-            ViewBag.List = accountService.AsQueryable<Account>().ToList();
+            ViewBag.List = accountService.AsQueryable().ToList();
             ViewBag.ElementType = "Account";
             return View("ListAndShow");
         }
 
         public IActionResult Load(int id)
         {
-            ViewBag.Element = accountService.Load<Account>(id);
+            ViewBag.Element = accountService.Load(id);
             ViewBag.Action = "show";
             return View("Show");
         }
@@ -43,7 +43,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var account = accountService.Load<Account>(id);
+            var account = accountService.Load(id);
             ViewBag.Element = account;
             ViewBag.Action = "update";
             return View("ShowPartial");
@@ -59,7 +59,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Remove(int id)
         {
-            var account = accountService.Load<Account>(id);
+            var account = accountService.Load(id);
             ViewBag.Element = account;
             ViewBag.Action = "delete";
             return View("ShowPartial");

@@ -15,14 +15,14 @@ namespace Web.Controllers
         }
         public IActionResult Index()
         {
-            ViewBag.List = userService.AsQueryable<User>().ToList();
+            ViewBag.List = userService.AsQueryable().ToList();
             ViewBag.ElementType = "User";
             return View("ListAndShow");
         }
 
         public IActionResult Load(int id)
         {
-            ViewBag.Element = userService.Load<User>(id);
+            ViewBag.Element = userService.Load(id);
             ViewBag.Action = "show";
             return View("Show");
         }
@@ -43,7 +43,7 @@ namespace Web.Controllers
         //[HttpGet]
         public IActionResult Edit(int id)
         {
-            var user = userService.Load<User>(id);
+            var user = userService.Load(id);
             ViewBag.Element = user;
             ViewBag.Action = "update";
             return View("ShowPartial");
@@ -59,7 +59,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Remove(int id)
         {
-            var user = userService.Load<User>(id);
+            var user = userService.Load(id);
             ViewBag.Element = user;
             ViewBag.Action = "delete";
             return View("ShowPartial");
