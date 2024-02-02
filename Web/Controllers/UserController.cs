@@ -30,30 +30,25 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            ViewBag.Action = "add";
-            ViewBag.Element = new User();
-            return View("ShowPartial");
+            ViewBag.Entity = new User();
+            return View("UserEdit");
         }
 
-        public IActionResult Insert([FromBody] User user)
-        {
-            userService.SaveAndFlush(user);
-            return Json(new GenericResponse(200, "El usuario fue insertado"));
-        }
-        //[HttpGet]
         public IActionResult Edit(int id)
         {
-            var user = userService.Load(id);
-            ViewBag.Element = user;
-            ViewBag.Action = "update";
-            return View("ShowPartial");
+            ViewBag.Entity = userService.Load(id);
+            return View("UserEdit");
         }
 
         [HttpPost]
-        public IActionResult Update([FromBody] User user)
+        public IActionResult Save([FromBody] User user)
         {
+            var message = "El usuario fue editado";
+
+            if (user.IsNew) message = "El usuario fue insertado";
+
             userService.SaveAndFlush(user);
-            return Json(new GenericResponse(200, "El usuario fue editado"));
+            return Json(new GenericResponse(200, message));
         }
 
         [HttpGet]
